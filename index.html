@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>مولد حساسية Free Fire (عربي) — معايرة Gyro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>مولد حساسية Free Fire</h1>
+    <p class="lead">أدخل مواصفات جهازك واختر أسلوب اللعب لتحصل على توصيات حساسية مخصصة.</p>
+
+    <form id="sensitivityForm" autocomplete="off">
+      <label for="device">طراز الجهاز</label>
+      <select id="device" name="device">
+        <option value="auto" data-tier="auto">اختر طرازاً أو "مخصص"</option>
+        <option value="iphone12" data-tier="flagship">iPhone 12 (Flagship)</option>
+        <option value="s21" data-tier="flagship">Samsung Galaxy S21 (Flagship)</option>
+        <option value="mi10" data-tier="mid">Xiaomi Mi 10 (Mid)</option>
+        <option value="redmi9" data-tier="low">Redmi 9 (Low)</option>
+        <option value="other" data-tier="custom">جهاز آخر / مخصص</option>
+      </select>
+
+      <label for="ram">حجم الذاكرة (RAM)</label>
+      <select id="ram" name="ram">
+        <option value="2">1-2 جيجابايت</option>
+        <option value="3">3-4 جيجابايت</option>
+        <option value="6" selected>6 جيجابايت أو أكثر</option>
+      </select>
+
+      <label for="refresh">معدل التحديث (Hz)</label>
+      <select id="refresh" name="refresh">
+        <option value="60">60Hz</option>
+        <option value="90">90Hz</option>
+        <option value="120" selected>120Hz</option>
+      </select>
+
+      <label>أسلوب اللعب</label>
+      <div class="radios">
+        <label><input type="radio" name="style" value="aggressive"> هجومي (Aggressive)</label>
+        <label><input type="radio" name="style" value="balanced" checked> متوازن (Balanced)</label>
+        <label><input type="radio" name="style" value="defensive"> دفاعي (Defensive)</label>
+      </div>
+
+      <div id="customTierSection" class="hidden">
+        <label for="customTier">اختر فئة أداء للجهاز (إن اخترت "مخصص")</label>
+        <select id="customTier">
+          <option value="flagship">Flagship (أعلى أداء)</option>
+          <option value="mid" selected>Mid (أداء متوسط)</option>
+          <option value="low">Low (أداء منخفض)</option>
+        </select>
+      </div>
+
+      <div class="gyroSection">
+        <h3>حساس/جيروسكوب</h3>
+        <p class="muted">يمكنك تفعيل الجيروسكوب لقياس استقرار جهازك واستخدامه لتعديل الحساسية تلقائياً.</p>
+        <div class="gyroControls">
+          <button type="button" id="enableGyro">تفعيل الجيروسكوب</button>
+          <label class="useGyroLabel"><input type="checkbox" id="useGyroAdjust"> استخدم الجيروسكوب لتعديل الحساسية</label>
+        </div>
+
+        <div id="gyroReadings" class="hidden">
+          <div>قراءات الدوران (deg/s): <span id="gyroValue">---</span></div>
+          <div>معدل استقرار متوسط: <span id="gyroAvg">---</span></div>
+        </div>
+
+        <div class="calibration">
+          <h4>معايرة الجيروسكوب</h4>
+          <p class="muted">سجّل قراءات لمدة 10 ثوانٍ للحصول على معامل مخصّص.</p>
+          <div class="calControls">
+            <button type="button" id="startCalBtn">بدء المعايرة (10s)</button>
+            <button type="button" id="applyCalBtn" disabled>تطبيق المعايرة</button>
+            <button type="button" id="saveCalBtn" disabled>حفظ المعايرة</button>
+            <button type="button" id="resetCalBtn">إعادة ضبط المعايرة</button>
+          </div>
+          <div id="calStatus" class="muted">الحالة: غير معاير</div>
+          <div id="calResults" class="hidden">
+            <div>متوسط: <span id="calAvg">---</span></div>
+            <div>انحراف معياري: <span id="calStd">---</span></div>
+            <div>معامل مقترح: <span id="calMult">---</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="actions">
+        <button type="button" id="generate">توليد الحساسية</button>
+        <button type="button" id="reset">إعادة ضبط</button>
+      </div>
+    </form>
+
+    <section id="results" class="hidden">
+      <h2>التوصية</h2>
+      <div id="profileSummary" class="summary"></div>
+      <table class="resultsTable">
+        <thead>
+          <tr><th>نوع الحساسية</th><th>قيمة مقترحة</th></tr>
+        </thead>
+        <tbody id="resultsBody"></tbody>
+      </table>
+      <div class="resultActions">
+        <button id="copyBtn">نسخ القيم</button>
+        <button id="tuneBtn">تحسين التوصية (زيادة/نقصان)</button>
+        <button id="exportBtn">تصدير كـ JSON</button>
+        <button id="saveProfileBtn">حفظ الملف الشخصي</button>
+      </div>
+      <p class="note">ملاحظة: هذه توصيات مبدئية — يمكنك تعديلها يدوياً داخل اللعبة حسب إحساسك.</p>
+    </section>
+
+    <section class="savedProfiles">
+      <h3>الملفات الشخصية المحفوظة</h3>
+      <div class="savedControls">
+        <select id="savedList"><option value="">لا يوجد ملفات محفوظة</option></select>
+        <button id="loadProfileBtn">تحميل</button>
+        <button id="deleteProfileBtn">حذف</button>
+        <button id="clearAllBtn">مسح الكل</button>
+      </div>
+    </section>
+
+    <footer>
+      <small>تم الإنشاء بواسطة مولد حساسية بسيط — يمكن تعديل العتلات والطرازات في الشيفرة.</small>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
