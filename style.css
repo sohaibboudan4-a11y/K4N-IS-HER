@@ -1,0 +1,81 @@
+:root{
+  --bg:#0f1724;
+  --card:#0b1220;
+  --accent:#f59e0b;
+  --text:#e6eef8;
+  --muted:#9fb0c8;
+  --glass: rgba(255,255,255,0.03);
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:linear-gradient(180deg,#071028 0%, #071b2b 100%);
+  color:var(--text);
+  direction:rtl;
+}
+
+.container{
+  max-width:820px;
+  margin:28px auto;
+  padding:24px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:12px;
+  box-shadow: 0 6px 30px rgba(2,6,23,0.6);
+  border:1px solid rgba(255,255,255,0.03);
+}
+
+h1{margin:0 0 8px 0;font-size:1.6rem;color:var(--accent)}
+.lead{margin:0 0 18px 0;color:var(--muted)}
+
+label{display:block;margin:12px 0 6px 0;color:var(--muted)}
+select, input[type="text"], input[type="number"]{
+  width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.04);
+  background:var(--card);
+  color:var(--text);
+  outline:none;
+}
+
+.radios{display:flex;gap:12px;flex-wrap:wrap}
+.radios label{background:var(--glass);padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.02)}
+
+.actions{margin-top:16px;display:flex;gap:12px}
+button{
+  background:var(--accent);
+  color:#072228;
+  border:none;
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+}
+button#reset{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04)}
+
+.hidden{display:none}
+.summary{margin:10px 0;padding:12px;background:rgba(255,255,255,0.02);border-radius:8px;color:var(--muted)}
+
+.resultsTable{width:100%;border-collapse:collapse;margin-top:12px}
+.resultsTable th, .resultsTable td{padding:10px;border-bottom:1px solid rgba(255,255,255,0.03);text-align:right}
+.resultsTable th{color:var(--muted);font-weight:600}
+
+.resultActions{display:flex;gap:8px;margin-top:10px}
+
+.note{color:var(--muted);font-size:0.9rem;margin-top:12px}
+
+footer{margin-top:18px;color:var(--muted);font-size:0.85rem;text-align:center}
+
+/* Gyro & saved profiles UI */
+.gyroSection{margin-top:14px;padding:10px;background:rgba(255,255,255,0.01);border-radius:8px;border:1px solid rgba(255,255,255,0.02)}
+.gyroControls{display:flex;gap:12px;align-items:center}
+.useGyroLabel{display:flex;align-items:center;gap:8px;color:var(--muted)}
+.muted{color:var(--muted);font-size:0.95rem}
+
+.savedProfiles{margin-top:14px;padding:10px;background:rgba(255,255,255,0.01);border-radius:8px;border:1px solid rgba(255,255,255,0.02)}
+.savedControls{display:flex;gap:8px;align-items:center}
+.savedControls select{width:auto;min-width:220px}
+.savedControls button{padding:8px 10px;font-size:0.9rem}
